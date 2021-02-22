@@ -20,6 +20,7 @@ def _download_imgs(args):
     # Download Images
     # TODO writer the iterator to download
 
+    # TODO format mss_url (url + \d+ + ".jpg") where \d+ has an upper limit of ca. 600
     # img = get_image(mss_url)
 
     
