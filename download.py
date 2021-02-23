@@ -12,16 +12,22 @@ def _download_imgs(args):
     """
     # From Arg Parse Get Manuscript Siglum
     mss = args.manuscript
+    folios = args.folio_count
 
     # Get the URL for the designated Manuscript
     sefaria_imgs = sefaria_urls()
     mss_url = sefaria_imgs[mss]
-
+    
     # Download Images
-    # TODO writer the iterator to download
+    
+    # Since a Codex Has A and B sides, account for the sides
+    folio_A = "A"
+    folio_B = "B"
 
-    # TODO format mss_url (url + \d+ + ".jpg") where \d+ has an upper limit of ca. 600
-    # img = get_image(mss_url)
+    # Download Folio Images for Manuscript
+    for i in range(int(folios)):
+        get_image(mss_url, mss, str("{:03}".format(i) + folio_A))
+        get_image(mss_url, mss, str("{:03}".format(i) + folio_B))
 
     
 
@@ -32,7 +38,9 @@ def main(argv):
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("manuscript", help="See manuscripts.ini for available entries")
+    parser.add_argument("folio_count", help="How many folios are they in the image set?")
     args = parser.parse_args()
+    # B19A Folio count 492-1
 
     _download_imgs(args)
 
